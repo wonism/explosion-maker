@@ -8,9 +8,16 @@
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=production webpack && cp -r src/images dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "push-dir --dir=dist --branch=gh-pages"
   },
-  "keywords": ["emoji", "custom emoji", "slack", "explosion", "meme"],
+  "keywords": [
+    "emoji",
+    "custom emoji",
+    "slack",
+    "explosion",
+    "meme"
+  ],
   "author": "wonism <yocee57@gmail.com> (https://wonism.github.io)",
   "license": "ISC",
   "dependencies": {
@@ -24,6 +31,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
+    "push-dir": "^0.4.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.0",
     "typescript": "^3.6.4",
