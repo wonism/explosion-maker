@@ -4,10 +4,10 @@
   "description": "Make Explosion",
   "main": "n/a",
   "scripts": {
-    "clean": "rm -rf docs",
+    "clean": "rm -rf dist",
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack && cp -r src/images docs",
+    "build": "NODE_ENV=production webpack && cp -r src/images dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["emoji", "custom emoji", "slack", "explosion", "meme"],

@@ -44,7 +44,7 @@ const prodConfig = {
     new htmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
       inject: false,
-      filename: path.join(__dirname, 'docs', 'index.html'),
+      filename: path.join(__dirname, 'dist', 'index.html'),
     }),
   ],
   optimization: {
@@ -54,7 +54,7 @@ const prodConfig = {
     "react": "react",
   },
   output: {
-    path: path.resolve(__dirname, 'docs'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     libraryTarget: 'umd',
     globalObject: 'this',
