@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <title>
+      Explosion Maker 💥
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta http-equiv="Access-Control-Allow-Headers" content="*" />
+    <meta http-equiv="Access-Control-Expose-Headers" content="*" />
+    <meta http-equiv="Access-Control-Allow-Credentials" content="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Make Explosion" />
+    <meta name="keywords" content="emoji, custom emoji, slack, explosion, meme" />
+    <meta name="author" content="wonism" />
+    <meta property="og:title" content="Explosion Maker💥" />
+    <meta property="og:site_name" content="Explosion Maker💥" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wonism.github.io/explosion-maker" />
+    <meta property="og:description" content="Make Explosion" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/png" href="./images/favicon.png" sizes="160x160">
+    <link rel="apple-touch-icon" sizes="160x160" href="./images/favicon.png">
+    <style>
+      @media (prefers-color-scheme: light) {
+        body {
+          background-color: #FFF;
+          color: #100E17;
+        }
+
+        button {
+          color: #FFF;
+        }
+      }
+
+      body {
+        color: #FFF;
+        background-color: #100E17;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      aside {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        padding: 0;
+        width: 1px;
+        height: 1px;
+        border: 0;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        white-space: nowrap;
+      }
+
+      #file-uploader {
+        display: none;
+      }
+
+      label {
+        cursor: pointer;
+      }
+
+      #file-uploader:disabled ~ div > label {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      #button {
+        display: inline-block;
+        padding: 12px 24px;
+        color: #100E17;
+        background-color: #57BBB3;
+        border-radius: 3px;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .1);
+      }
+
+      #file-uploader:not(disabled) + #button:hover, #file-uploader:not(disabled) + #button:focus {
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .1), inset 0 -8em 0 rgba(255, 255, 255, .2);
+      }
+
+      #file-uploader:not(disabled) + #button:active {
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .07), inset 0 -8em 0 rgba(0, 0, 0, .15);
+      }
+
+      #animated-image {
+        border: 1px solid #57BBB3;
+      }
+
+      img[src=""] {
+        content: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
+      }
+
+      footer {
+        margin-top: 32px;
+        text-align: center;
+      }
+
+      a {
+        color: #FFF;
+      }
+
+      a:hover,
+      a:visited {
+        color: inherit;
+      }
+
+      #loader-wrapper {
+        position: relative;
+        padding: 16px 0;
+      }
+
+      #loader {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        width: 60px;
+        height: 60px;
+        transform: translateZ(1px);
+      }
+
+      #loader.active {
+        display: inline-block;
+      }
+
+      #loader > div {
+        display: inline-block;
+        margin: 6px;
+        width: 51px;
+        height: 51px;
+        border-radius: 50%;
+        background: #57BBB3;
+        animation: loader 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      }
+
+      @keyframes loader {
+        0%, 100% {
+          animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+        }
+        0% {
+          transform: rotateY(0deg);
+        }
+        50% {
+          transform: rotateY(1800deg);
+          animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+        }
+        100% {
+          transform: rotateY(3600deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Explosion Maker 💥
+      </h1>
+    </header>
+    <main>
+      <section>
+        <input id="file-uploader" type="file" accept="image/*" />
+        <div id="loader-wrapper">
+          <img id="animated-image" src="" width="128" height="128" alt="" aria-hidden="true" />
+          <!-- from https://loading.io/css/ -->
+          <div id="loader"><div></div></div>
+        </div>
+        <div>
+          <label id="button" for="file-uploader">Upload Image</label>
+        </div>
+        <div class="visually-hidden">
+          <img id="image" src="" width="128" height="128" alt="" aria-hidden="true" />
+          <img id="empty" src="./images/empty.gif" width="128" height="128" alt="" aria-hidden="true" />
+        </div>
+        <div id="image-group" class="visually-hidden">
+          <img src="./images/explosion-1.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-2.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-3.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-4.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-5.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-6.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-7.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-8.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-9.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-10.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-11.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-12.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-13.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-14.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-15.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-16.gif" width="128" height="128" alt="" aria-hidden="true" />
+          <img src="./images/explosion-17.gif" width="128" height="128" alt="" aria-hidden="true" />
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a href="https://github.com/wonism" target="_blank" rel="noopener noreferrer">
+        &copy;wonism
+      </a>
+    </footer>
+    <aside>
+    </aside>
+    <script src="/bundle.js" async defer></script>
+  </body>
+</html>
