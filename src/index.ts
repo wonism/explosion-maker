@@ -1,10 +1,9 @@
-import gifshot from 'gifshot';
+import GIF from 'gif.js';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { size } from './constants';
 import getContext from './getContext';
-import toUrl from './toUrl';
 
 declare global {
   interface Window {
@@ -26,47 +25,40 @@ const getImage$ = file$.pipe(
     fileUploader.setAttribute('disabled', 'disabled');
   }),
   switchMap(getContext),
-  switchMap(toUrl),
-  tap((url) => {
-    image.src = url;
-  })
 );
 
 const subscribe = getImage$.subscribe(
-  () => {
+  (context: CanvasRenderingContext2D) => {
     const explosionFrames = document.querySelectorAll('#image-group img');
-    const src = image.src;
 
     const images = [
-      src, src, src, src, empty, empty,
-      src, src, src, empty, empty,
-      src, empty, empty,
-      src, empty,
-      src, empty,
-      src, empty,
-      src, empty,
-      ...Array.from(explosionFrames).map(_ => (_ as any).src),
+      context, context, context, context, empty, empty,
+      context, context, context, empty, empty,
+      context, empty, empty,
+      context, empty,
+      context, empty,
+      context, empty,
+      context, empty,
+      ...Array.from(explosionFrames),
     ];
 
-    gifshot.createGIF({
-      gifWidth: size,
-      gifHeight: size,
-      images,
-      interval: 0.1,
-      numFrames: 10,
-      frameDuration: 1,
-      sampleInterval: 10,
-      numWorkers: 2,
-    }, (result) => {
+    const gif = new GIF({
+      workers: 4,
+      quality: 10,
+    });
+
+    images.forEach((image) => { gif.addFrame(image, { delay: 10 }); });
+
+    gif.on('finished', (blob) => {
+      const url = URL.createObjectURL(blob);
+
       loader.removeAttribute('class');
       fileUploader.removeAttribute('disabled');
 
-      if (!result.error) {
-        animatedImage.src = result.image;
-      } else {
-        alert('Failed to make explosion');
-      }
+      animatedImage.src = url;
     });
+
+    gif.render();
   },
   () => {
     loader.removeAttribute('class');

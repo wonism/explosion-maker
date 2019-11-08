@@ -7,7 +7,7 @@
     "clean": "rm -rf dist",
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack && cp -r src/images dist",
+    "build": "NODE_ENV=production webpack && cp -r src/images dist && cp src/gif.worker.js dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "push-dir --dir=dist --branch=gh-pages"
   },
@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "animated_gif": "^1.0.2",
-    "gifshot": "git+https://git@github.com/wonism/gifshot.git",
+    "gif.js": "^0.2.0",
     "rxjs": "^6.5.3"
   },
   "devDependencies": {
