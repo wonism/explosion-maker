@@ -21,7 +21,6 @@
   "author": "wonism <yocee57@gmail.com> (https://wonism.github.io)",
   "license": "ISC",
   "dependencies": {
-    "animated_gif": "^1.0.2",
     "gif.js": "^0.2.0",
     "rxjs": "^6.5.3"
   },
